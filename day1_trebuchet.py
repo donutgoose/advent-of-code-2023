@@ -51,12 +51,6 @@ def firstint(li, acc=''):
         if li[i] in nums:
             return li[i]
 
-
-
-# example = "two1nine"
-# print(firstint(example))
-# print(firstint(example[::-1]))
-
 for line in data:
     _line = line.strip()
     print(_line)
