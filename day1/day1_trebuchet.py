@@ -50,13 +50,9 @@ def firstint(li, acc=''):
         
         if li[i] in nums:
             return li[i]
-
+            
 for line in data:
     _line = line.strip()
-    print(_line)
-    first = firstint(_line)
-    last = firstint(_line[::-1])
-    _str = first + last
-    print(_str)
-    acc += int(_str)
-print(acc)
+    acc += int(firstint(_line) + firstint(_line[::-1]))
+
+
