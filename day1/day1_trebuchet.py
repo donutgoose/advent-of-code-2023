@@ -2,7 +2,7 @@ nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 words = ['one', 'two', 'six', 'four', 'five', 'nine', 'three', 'seven', 'eight', 'eno', 'owt', 'xis', 'ruof', 'evif', 'enin', 'eerht', 'neves', 'thgie']
 
 data = open('advent_day1_inputs', 'r')
-example_data = open('example_data', 'r')
+# example_data = open('example_data', 'r')
 acc = 0
 
 def convert(s):
