@@ -1,8 +1,7 @@
-example_seeds = [79,14,55,13]
-example_1 = [[50,98,2],[52,50,48]]
+import copy
+
 data = open('data', 'r')
 nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-
 seeds = []
 soil = []
 fert = []
@@ -55,60 +54,50 @@ def parse_text(file):
             acc.append(d)
     location = list(map(lambda x: x.split(" "), acc))
     location = list(map(lambda x: list(map(int, x)), location))
-    #print(f'ACC > {acc}')
     return acc
+
+    print(out)
+    out1 = out[0:1000]
+    out2 = out[::-1]
+    out2 = out2[0:1000]
+    out2 = out2[::-1]
+    out1.extend(out2)
+    return out1
 
 def convert(seeds, ranges):
     out = []
-    seeds2 = seeds
-    for d in ranges:
-        destination = list(range(d[0], d[0] + d[2]))
-        source = list(range(d[1], d[1] + d[2]))
-        print(f'DESTINATION > {destination}')
-        print(f'SOURCE > {source}')
-        for index, sour in enumerate(source):
-            if sour in seeds:
-                out.append(destination[index])
-                del(seeds2[seeds2.index(sour)])
-        # for seed in seeds:
-        #     print(f'{seed} > ')
-        #     if seed in source:
-        #         out.append(destination[source.index(seed)])
-        #         del(seeds2[seeds2.index(seed)])
-    out.extend(seeds2)
+    fails = []
+    fails = copy.deepcopy(seeds)
+    for index, seed in enumerate(seeds):
+        print(seeds)
+        for d in ranges:
+            destination = [d[0], d[0] + d[2]]
+            source = [d[1], d[1] + d[2]]
+            print(f'{seed} > {seed >= source[0] and source[1] >= seed}')
+            if seed >= source[0] and source[1] >= seed and seed in fails:
+                _ind = seed - source[0]
+                print(f'\n{seed} > {destination[0] + _ind}\n')
+                out.append(destination[0] + _ind)
+                #breakpoint()
+                fails[index] = -1
+    out.extend(list(filter(lambda x: x != -1, fails)))
     print('\n')
     return out
 
 parse_text(data)
-ranges = [soil,fert,water,light,temp,humid,location]
-
-# print(f'SOIL > {soil}')
-# print(f'FERT > {fert}')
-# print(f'WATER > {water}')
-# print(f'LIGHT > {light}')
-# print(f'TEMP > {temp}')
-# print(f'HUMIDITY > {humid}')
-# print(f'LOCATION > {location}')
-
-ranges = ranges[1:]
-#print(ranges)
-
-print("its runnin lol")
 
 seeds = convert(seeds, soil)
-#print(seeds)
-seeds = convert(seeds, fert)
-#print(seeds)
-seeds = convert(seeds, water)
-#print(seeds)
-seeds = convert(seeds, light)
-#print(seeds)
-seeds = convert(seeds, temp)
-#print(seeds)
-seeds = convert(seeds, humid)
-#print(seeds)
-seeds = convert(seeds, location)
-#print(seeds)
-
-
 print(seeds)
+seeds = convert(seeds, fert)
+seeds = convert(seeds, water)
+seeds = convert(seeds, light)
+seeds = convert(seeds, temp)
+seeds = convert(seeds, humid)
+seeds = convert(seeds, location)
+
+min = 99999999999999999999999
+for seed in seeds:
+    if seed < min:
+        min = copy.deepcopy(seed)
+
+print(min)
