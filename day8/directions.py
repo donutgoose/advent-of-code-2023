@@ -12,7 +12,7 @@ def p1():
             if currentLocation == 'ZZZ':break
             if d == 'L': step += 1; currentLocation = adresses[adresses_first.index(currentLocation)][1]
             if d == 'R': step += 1; currentLocation = adresses[adresses_first.index(currentLocation)][2]
-#p1(); print(f'Part 1: {step}')
+p1(); print(f'Part 1: {step}')
 adr_a = [lo for lo in adresses_first if lo.endswith('A')]
 print(adr_a)
 def p2(location):
